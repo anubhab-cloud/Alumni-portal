@@ -1,0 +1,122 @@
+<!-- Main Gallery Section -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <!-- Header for the gallery -->
+        <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-4">Cherished Moments</h1>
+            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
+                Relive the memories from our past events.
+            </p>
+        </div>
+
+        <!-- Rotating Image Carousel -->
+        <div class="carousel-container mb-16">
+            <div class="carousel">
+                <!-- Carousel items will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Photos Section -->
+        <section class="mb-16">
+            <h2 class="text-center text-4xl font-extrabold text-blue-400 mb-8 pb-2 border-b-2 border-blue-400 max-w-md mx-auto">Photos</h2>
+            
+            <p class="text-center text-gray-400 mb-8">
+                View photos from past events. (Note: These are placeholder images. The host would integrate a Google Photos album here.)
+            </p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Photo items will be populated here. Using placeholders for demonstration. -->
+                <div class="gallery-item rounded-xl overflow-hidden shadow-lg">
+                    <img src="photos alumni/473079972_1333053141070182_1958949966397476967_n.jpg" alt="Event photo 1" class="w-full h-auto object-cover transform duration-300 hover:scale-110">
+                </div>
+                <div class="gallery-item rounded-xl overflow-hidden shadow-lg">
+                    <img src="photos alumni/473234327_1333052841070212_6853795355348732615_n.jpg" alt="Event photo 2" class="w-full h-auto object-cover transform duration-300 hover:scale-110">
+                </div>
+                <div class="gallery-item rounded-xl overflow-hidden shadow-lg">
+                    <img src="photos alumni/473239188_1333052854403544_9176955641710841186_n.jpg" alt="Event photo 3" class="w-full h-auto object-cover transform duration-300 hover:scale-110">
+                </div>
+                <div class="gallery-item rounded-xl overflow-hidden shadow-lg">
+                    <img src="photos alumni/473244643_1333052957736867_4147173529288968171_n.jpg" alt="Event photo 4" class="w-full h-auto object-cover transform duration-300 hover:scale-110">
+                </div>
+                <div class="gallery-item rounded-xl overflow-hidden shadow-lg">
+                    <img src="photos alumni/473248195_1333052884403541_6204596844642033982_n.jpg" alt="Event photo 5" class="w-full h-auto object-cover transform duration-300 hover:scale-110">
+                </div>
+                <div class="gallery-item rounded-xl overflow-hidden shadow-lg">
+                    <img src="photos alumni/473249528_1333053157736847_32801019014187835_n.jpg" alt="Event photo 6" class="w-full h-auto object-cover transform duration-300 hover:scale-110">
+                </div>
+                <div class="gallery-item rounded-xl overflow-hidden shadow-lg">
+                    <img src="photos alumni/473285210_1333052961070200_8817645518090434464_n.jpg" alt="Event photo 7" class="w-full h-auto object-cover transform duration-300 hover:scale-110">
+                </div>
+                <div class="gallery-item rounded-xl overflow-hidden shadow-lg">
+                    <img src="photos alumni/473559508_1333053154403514_2353682122500585235_n.jpg" alt="Event photo 8" class="w-full h-auto object-cover transform duration-300 hover:scale-110">
+                </div>
+            </div>
+        </section>
+
+        <!-- Videos Section -->
+        <section>
+            <h2 class="text-center text-4xl font-extrabold text-purple-400 mb-8 pb-2 border-b-2 border-purple-400 max-w-md mx-auto">Videos</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Embedded YouTube Video 1 -->
+                <div class="gallery-item rounded-xl overflow-hidden bg-gray-800 shadow-lg relative">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/CYVUtAHwPDg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <!-- Embedded YouTube Video 2 -->
+                <div class="gallery-item rounded-xl overflow-hidden bg-gray-800 shadow-lg relative">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/CYVUtAHwPDg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <!-- Placeholder for additional videos -->
+                <div class="gallery-item rounded-xl overflow-hidden bg-gray-800 shadow-lg relative">
+                    <div class="video-container flex items-center justify-center p-4">
+                        <p class="text-gray-400 text-center" style="color: #fff; align-items: center; font-weight: 800;justify-content: center;">More videos coming soon!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+     document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.querySelector('.carousel');
+            const images = [
+                
+               'photos alumni/473079972_1333053141070182_1958949966397476967_n.jpg',
+               'photos alumni/473239188_1333052854403544_9176955641710841186_n.jpg',
+               'photos alumni/473234327_1333052841070212_6853795355348732615_n.jpg',
+               'photos alumni/473248195_1333052884403541_6204596844642033982_n.jpg',
+               'photos alumni/473244643_1333052957736867_4147173529288968171_n.jpg',
+               'photos alumni/473285210_1333052961070200_8817645518090434464_n.jpg',
+               'photos alumni/473249528_1333053157736847_32801019014187835_n.jpg',
+               'photos alumni/473559508_1333053154403514_2353682122500585235_n.jpg',
+               'photos alumni/473248195_1333052884403541_6204596844642033982_n.jpg',
+              
+            ];
+
+            const numImages = images.length;
+            const angle = 360 / numImages;
+            const radius = 250 / (2 * Math.tan(Math.PI / numImages));
+
+            images.forEach((src, index) => {
+                const item = document.createElement('div');
+                item.className = 'carousel-item';
+                item.innerHTML = `<img src="${src}" alt="Carousel image ${index + 1}">`;
+                
+                gsap.set(item, {
+                    rotationY: index * angle,
+                    transformOrigin: `50% 50% -${radius}px`
+                });
+                
+                carousel.appendChild(item);
+            });
+
+            gsap.to(carousel, {
+                rotationY: "+=360",
+                duration: 20,
+                repeat: -1,
+                ease: "none"
+            });
+        });

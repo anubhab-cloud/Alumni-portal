@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsor Page</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Inter Font -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            background-color:#030a26;
+        }
+        canvas {
+            display: block;
+        }
+        /* Custom background animation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 10%, #1a202c, transparent 20%),
+                        radial-gradient(circle at 90% 90%, #1a202c, transparent 20%),
+                        radial-gradient(circle at 50% 50%, #0c0f16, transparent 20%);
+            background-size: 200% 200%;
+            animation: move-bg 30s infinite alternate linear;
+            z-index: -1;
+        }
+        @keyframes move-bg {
+            from { background-position: 0 0; }
+            to { background-position: 100% 100%; }
+        }
+        /* Animation for section titles */
+        @keyframes pulse-glow {
+            0%, 100% {
+                text-shadow: 0 0 5px #0ea5e9, 0 0 10px #0ea5e9;
+            }
+            50% {
+                text-shadow: 0 0 10px #0ea5e9, 0 0 20px #0ea5e9;
+            }
+        }
+        .animated-title {
+            animation: pulse-glow 3s infinite ease-in-out;
+        }
+         nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #16245f70;
+            padding: 17px 22px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 38px;
+            margin-right: 0px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-text span:first-child {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .logo-text span:last-child {
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links li:last-child {
+            margin-left: 280px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 8px 12px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: rgba(0, 175, 239, 0.961);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 110%;
+            left: 0;
+            background: #1a1a1a;
+            border-radius: 6px;
+            min-width: 160px;
+            z-index: 1001;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .dropdown-content a:hover {
+            background: #333;
+        }
+
+        .nav-links li:hover .dropdown-content {
+            display: block;
+        }
+
+        .login-btn {
+            background: rgb(0, 170, 255);
+            color: white;
+            font-weight: 700;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #030303;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+        }
+
+         footer {
+            background: #0a0a1a;
+            padding: 50px 20px;
+            color: #ccc;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-col {
+            flex: 1;
+            margin: 15px;
+            min-width: 250px;
+        }
+        
+        .footer-col h3 {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .footer-col p, .footer-col a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .footer-col a:hover {
+            color: red;
+        }
+        
+        .social-icons a {
+            margin-right: 12px;
+            font-size: 20px;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: red;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #333;
+            margin-top: 30px;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        /* Responsive styles */
+@media (max-width: 1024px) {
+  .nav-links li:last-child {
+    margin-left: 0; /* prevent huge gap on tablets */
+  }
+}
+
+@media (max-width: 768px) {
+     @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 72px;
+        right: -100%;
+        flex-direction: column;
+        background: #000;
+        width: 280px;
+        height: calc(100vh - 72px);
+        padding: 20px;
+        transition: right 0.3s ease;
+        overflow-y: auto;
+        gap: 15px;
+      }
+      .nav-links.active { right: 0; }
+      .nav-links li { width: 100%; margin: 5px 0; }
+      .dropdown-content {
+        position: static;
+        display: none;
+        margin-top: 10px;
+        margin-left: 20px;
+        width: calc(100% - 20px);
+      }
+      .marque{
+        animation-duration: 20s;
+        animation-delay: 0.1ms;
+      }
+      .nav-links li.active .dropdown-content { display: block; }
+      .hamburger { display: flex; }
+    }
+
+  .sponsor-logo {
+    width: 150px; /* scale logos for small screens */
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-col {
+    margin: 10px 0;
+  }
+}
+
+
+    </style>
+</head>
+<body class="bg-slate-900 text-white relative">
+
+    <!-- Fixed Navigation Bar -->
+ <nav>
+    <div class="logo">
+      <img src="logoo.png" alt="Logo">
+      <div class="logo-text">
+        <span>Alumni</span>
+        <span>Golden Valley</span>
+      </div>
+    </div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li>
+        <a href="#" onclick="toggleDropdown(event, this.parentNode)">About</a>
+        <div class="dropdown-content">
+          <a href="about-alumni.html">About Alumni</a>
+          <a href="about-us.html">About Team</a>
+        </div>
+      </li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="schedule.html">Schedule</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li>
+        <a href="#" onclick="toggleDropdown(event, this.parentNode)">Gallery</a>
+        <div class="dropdown-content">
+          <a href="past-gallery.html">Past Events</a>
+          <a href="ongoing-gallery.html">Current Event</a>
+        </div>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.html"><button class="login-btn">Login</button></a></li>
+    </ul>
+  </nav>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 id="main-title" class="text-4xl sm:text-5xl font-bold mt-10 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-cyan-500">Our Incredible Sponsors</h1>
+            <p class="text-lg text-slate-400 mb-8">
+                A huge thank you to our partners who support us in bringing this program to success.
+            </p>
+        </div>
+
+        <!-- 3D Animation Container -->
+        <div id="canvas-container" class="w-full h-screen relative">
+            <!-- This is where the Three.js canvas will be placed -->
+        </div>
+
+        <!-- Scrolling Sponsor Marquee Section -->
+        <section class="w-full py-16">
+            <h2 class="animated-title text-3xl sm:text-4xl font-bold text-center mb-12 text-sky-400">Our Valued Partners</h2>
+            <div class="overflow-hidden relative w-full">
+                <div class="flex space-x-16 marquee">
+                    <!-- Create placeholder images that match the site's theme -->
+                    <!-- Original Set -->
+                    <img src="lenskart.jpeg" alt="Lenskart Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="game.jpg" alt="Royal Gems & Jewels Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="sponsorphoto.png" alt="Sweet Delights Bakery Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="snapdragon.png" alt="Gourmet Bites Restaurant Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="company.jpg" alt="Pro-Sports Gear Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="nike.png" alt="Dell Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="haldiram.svg" alt="Modern Living Furniture Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="cocacola.png" alt="Global Mobile Store Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    
+                    <!-- Duplicate Set (for seamless loop) -->
+                    <img src="lenskart.jpeg" alt="Lenskart Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="game.jpg" alt="Royal Gems & Jewels Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="spon-amazon.jpeg" alt="Sweet Delights Bakery Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="snapdragon.png" alt="Gourmet Bites Restaurant Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="company.jpg" alt="Pro-Sports Gear Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="spon-pepsi.jpeg" alt="Dell Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="cocacola.png" alt="Modern Living Furniture Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="haldiram.svg" alt="Global Mobile Store Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sponsor Information Section -->
+        <section class="container mx-auto px-4 py-16">
+            <h2 class="animated-title text-3xl sm:text-4xl font-bold text-center mb-12 text-sky-400">Partner Details</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Sponsor Card 1 -->
+                <div class="sponsor-card bg-slate-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 hover:border-sky-400 border border-transparent">
+                    <h3 class="text-xl font-bold mb-2 text-sky-400">Lenskart</h3>
+                    <p class="text-slate-400 text-sm">Category: Platinum Sponsor</p>
+                    <p class="mt-4">
+                        Lenskart is a visionary leader in eyewear, combining style and technology to offer a wide range of eyeglasses, sunglasses, and contact lenses.
+                    </p>
+                    <a href="#" class="mt-4 inline-block text-sky-400 hover:text-sky-500 font-semibold transition-colors">
+                        Discover More &rarr;
+                    </a>
+                </div>
+
+                <!-- Sponsor Card 2 -->
+                <div class="sponsor-card bg-slate-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 hover:border-sky-400 border border-transparent">
+                    <h3 class="text-xl font-bold mb-2 text-sky-400">Royal Gems & Jewels</h3>
+                    <p class="text-slate-400 text-sm">Category: Gold Sponsor</p>
+                    <p class="mt-4">
+                        A boutique jewellery shop offering exquisite, handcrafted pieces. Their commitment to craftsmanship and quality shines in every design.
+                    </p>
+                    <a href="#" class="mt-4 inline-block text-sky-400 hover:text-sky-500 font-semibold transition-colors">
+                        View Collection &rarr;
+                    </a>
+                </div>
+                
+                <!-- Sponsor Card 3 -->
+                <div class="sponsor-card bg-slate-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 hover:border-sky-400 border border-transparent">
+                    <h3 class="text-xl font-bold mb-2 text-sky-400">Sweet Delights Bakery</h3>
+                    <p class="text-slate-400 text-sm">Category: Gold Sponsor</p>
+                    <p class="mt-4">
+                        Indulge in a world of flavor with Sweet Delights Bakery. They create delicious pastries, cakes, and sweets that are a treat for the eyes and the palate.
+                    </p>
+                    <a href="#" class="mt-4 inline-block text-sky-400 hover:text-sky-500 font-semibold transition-colors">
+                        Explore Treats &rarr;
+                    </a>
+                </div>
+
+                <!-- Sponsor Card 4 -->
+                <div class="sponsor-card bg-slate-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 hover:border-sky-400 border border-transparent">
+                    <h3 class="text-xl font-bold mb-2 text-sky-400">The Pen & Paper Co.</h3>
+                    <p class="text-slate-400 text-sm">Category: Silver Sponsor</p>
+                    <p class="mt-4">
+                        Your go-to destination for all stationary needs. From notebooks to art supplies, they provide the tools for creativity and organization.
+                    </p>
+                    <a href="#" class="mt-4 inline-block text-sky-400 hover:text-sky-500 font-semibold transition-colors">
+                        Find Supplies &rarr;
+                    </a>
+                </div>
+
+                <!-- Sponsor Card 5 -->
+                <div class="sponsor-card bg-slate-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 hover:border-sky-400 border border-transparent">
+                    <h3 class="text-xl font-bold mb-2 text-sky-400">Gourmet Bites Restaurant</h3>
+                    <p class="text-slate-400 text-sm">Category: Platinum Sponsor</p>
+                    <p class="mt-4">
+                        A culinary experience like no other. Gourmet Bites serves up a fusion of global flavors, with fresh ingredients and a passionate team.
+                    </p>
+                    <a href="#" class="mt-4 inline-block text-sky-400 hover:text-sky-500 font-semibold transition-colors">
+                        Book a Table &rarr;
+                    </a>
+                </div>
+
+                <!-- Sponsor Card 6 -->
+                <div class="sponsor-card bg-slate-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 hover:border-sky-400 border border-transparent">
+                    <h3 class="text-xl font-bold mb-2 text-sky-400">Pro-Sports Gear</h3>
+                    <p class="text-slate-400 text-sm">Category: Gold Sponsor</p>
+                    <p class="mt-4">
+                        Equipping athletes for success. Pro-Sports Gear provides high-performance sports apparel, equipment, and accessories for every level of competition.
+                    </p>
+                    <a href="#" class="mt-4 inline-block text-sky-400 hover:text-sky-500 font-semibold transition-colors">
+                        Shop Now &rarr;
+                    </a>
+                </div>
+
+                <!-- Sponsor Card 7 -->
+                <div class="sponsor-card bg-slate-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 hover:border-sky-400 border border-transparent">
+                    <h3 class="text-xl font-bold mb-2 text-sky-400">Luxury Stay Hotels</h3>
+                    <p class="text-slate-400 text-sm">Category: Silver Sponsor</p>
+                    <p class="mt-4">
+                        Offering comfort, style, and hospitality. Luxury Stay Hotels provides a premium experience for travelers seeking relaxation and world-class service.
+                    </p>
+                    <a href="#" class="mt-4 inline-block text-sky-400 hover:text-sky-500 font-semibold transition-colors">
+                        Plan Your Stay &rarr;
+                    </a>
+                </div>
+
+                <!-- Sponsor Card 8 -->
+                <div class="sponsor-card bg-slate-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 hover:border-sky-400 border border-transparent">
+                    <h3 class="text-xl font-bold mb-2 text-sky-400">Dell</h3>
+                    <p class="text-slate-400 text-sm">Category: Platinum Sponsor</p>
+                    <p class="mt-4">
+                        A global leader in computing technology, Dell provides powerful laptops, desktops, and servers that empower individuals and businesses.
+                    </p>
+                    <a href="#" class="mt-4 inline-block text-sky-400 hover:text-sky-500 font-semibold transition-colors">
+                        View Products &rarr;
+                    </a>
+                </div>
+                
+                <!-- Sponsor Card 9 -->
+                <div class="sponsor-card bg-slate-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 hover:border-sky-400 border border-transparent">
+                    <h3 class="text-xl font-bold mb-2 text-sky-400">Modern Living Furniture</h3>
+                    <p class="text-slate-400 text-sm">Category: Gold Sponsor</p>
+                    <p class="mt-4">
+                        Creating beautiful and functional spaces. Modern Living Furniture offers stylish and durable furniture for contemporary homes and offices.
+                    </p>
+                    <a href="#" class="mt-4 inline-block text-sky-400 hover:text-sky-500 font-semibold transition-colors">
+                        Browse Designs &rarr;
+                    </a>
+                </div>
+
+                <!-- Sponsor Card 10 -->
+                <div class="sponsor-card bg-slate-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 hover:border-sky-400 border border-transparent">
+                    <h3 class="text-xl font-bold mb-2 text-sky-400">Global Mobile Store</h3>
+                    <p class="text-slate-400 text-sm">Category: Silver Sponsor</p>
+                    <p class="mt-4">
+                        Stay connected with the latest technology. Global Mobile Store provides a wide selection of smartphones and accessories from top brands.
+                    </p>
+                    <a href="#" class="mt-4 inline-block text-sky-400 hover:text-sky-500 font-semibold transition-colors">
+                        See Deals &rarr;
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Become a Sponsor Section -->
+        <section class="py-20 bg-gradient-to-r from-sky-600 to-cyan-600">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl font-bold text-white mb-4">Become a Sponsor</h2>
+                <p class="text-lg text-sky-100 max-w-3xl mx-auto mb-8">
+                    Partner with us to support ideas worth spreading and gain visibility among changemakers. Get in touch to learn more about sponsorship opportunities.
+                </p>
+                <a href="tel:+918732016798" style="background-color: #091634; color: #fff;" class="bg-white text-sky-600 font-bold py-3 px-8 rounded-full text-lg hover:bg-slate-100 transition-transform transform hover:scale-105 duration-300 shadow-lg">
+                    Contact Us
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+     <footer>
+        <div class="footer-col">
+            <h3><i class="fas fa-rocket"></i> Alumni Association</h3>
+            <p>Alumni are not just former students, they are the living embodiment of an institution's achievements and values</p>
+        </div>
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <p><a href="index.html">Home</a></p>
+            <p><a href="events.html">Events</a></p>
+            <p><a href="schedule.html">Schedule</a></p>
+            <p><a href="sponsors.html">Sponsors</a></p>
+        </div>
+        <div class="footer-col">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-envelope"></i> sample@gmail.com</p>
+            <a href="tel:+918732016798"><p><i class="fas fa-phone"></i> +91 8732016798</p></a>
+            <a href="https://maps.app.goo.gl/3qdrLz4HZDjSQ4gy6"><p><i class="fas fa-map-marker-alt"></i> PADMAPUR | DHARMANAGAR | TRIPURA</p></a>
+        </div>
+        <div class="footer-col">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/gvhs.alumni/"><i class="fab fa-facebook fa-beat" style="color: #1a5eff;"></i></a>
+                <a href="https://www.youtube.com/@gvhsalumniofficial3726"><i class="fa-brands fa-youtube fa-beat" style="color: rgb(157, 5, 5);"></i></a>
+                <a href="https://www.linkedin.com/in/atanu-roy-ab1618339?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin fa-beat" style="color: #23a4e9;"></i></a>
+                <a href="https://www.instagram.com/alumnigoldenvalley/"><i class="fab fa-instagram fa-beat" style="color: #fff;"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            ©Alumni Association GVHS 2025. All rights reserved.
+        </div>
+    </footer>
+
+<script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/08/30/19/20250830190753-XP3BMBNB.js"></script>
+    <!-- Three.js and GSAP CDNs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        // Sponsor data for the 3D scene
+        const sponsors = [
+            "Lenskart", "Royal Gems & Jewels", "Sweet Delights Bakery", "The Pen & Paper Co.", 
+            "Gourmet Bites Restaurant", "Pro-Sports Gear", "Luxury Stay Hotels", "Dell", 
+            "Modern Living Furniture", "Global Mobile Store", "Quantum Solutions"
+        ];
+        
+        // --- THREE.JS SETUP ---
+        const container = document.getElementById('canvas-container');
+        let scene, camera, renderer, mouse;
+        let sponsorObjects = [];
+        let raycaster;
+        let INTERSECTED;
+
+        function init() {
+            // Scene setup
+            scene = new THREE.Scene();
+            
+            // Camera setup
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            // Renderer setup
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+            directionalLight.position.set(0, 1, 1);
+            scene.add(directionalLight);
+
+            // Raycaster and Mouse
+            raycaster = new THREE.Raycaster();
+            mouse = new THREE.Vector2();
+
+            // Create sponsor objects
+            createSponsors();
+
+            // Handle window resize
+            window.addEventListener('resize', onWindowResize, false);
+            container.addEventListener('mousemove', onMouseMove, false);
+        }
+
+        function createSponsors() {
+            sponsors.forEach((name, index) => {
+                // Create a canvas for the texture
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.width = 512;
+                canvas.height = 256;
+
+                // Create a rounded rectangle background
+                context.fillStyle = 'rgba(2, 6, 23, 0.6)'; // Semi-transparent slate-950
+                context.strokeStyle = '#0ea5e9'; // sky-500 border
+                context.lineWidth = 10;
+                context.beginPath();
+                context.moveTo(20, 0);
+                context.lineTo(canvas.width - 20, 0);
+                context.quadraticCurveTo(canvas.width, 0, canvas.width, 20);
+                context.lineTo(canvas.width, canvas.height - 20);
+                context.quadraticCurveTo(canvas.width, canvas.height, canvas.width - 20, canvas.height);
+                context.lineTo(20, canvas.height);
+                context.quadraticCurveTo(0, canvas.height, 0, canvas.height - 20);
+                context.lineTo(0, 20);
+                context.quadraticCurveTo(0, 0, 20, 0);
+                context.closePath();
+                context.fill();
+                context.stroke();
+                
+                context.font = 'Bold 60px Inter';
+                context.fillStyle = '#bae6fd'; // sky-200 text
+                context.textAlign = 'center';
+                context.textBaseline = 'middle';
+                context.fillText(name, canvas.width / 2, canvas.height / 2);
+
+                const texture = new THREE.CanvasTexture(canvas);
+                const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
+                const geometry = new THREE.PlaneGeometry(3, 1.5);
+                const sponsorPlane = new THREE.Mesh(geometry, material);
+
+                // Initial position and rotation
+                const x = (Math.random() - 0.5) * 10;
+                const y = (Math.random() - 0.5) * 10;
+                const z = (Math.random() - 0.5) * 10;
+                sponsorPlane.position.set(x, y, z);
+                sponsorPlane.rotation.x = Math.random() * Math.PI;
+                sponsorPlane.rotation.y = Math.random() * Math.PI;
+
+                // GSAP animation for position
+                gsap.to(sponsorPlane.position, {
+                    x: Math.random() * 20 - 10,
+                    y: Math.random() * 20 - 10,
+                    z: Math.random() * 20 - 10,
+                    duration: 20,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut"
+                });
+
+                // GSAP animation for rotation
+                gsap.to(sponsorPlane.rotation, {
+                    x: sponsorPlane.rotation.x + Math.PI * 2,
+                    y: sponsorPlane.rotation.y + Math.PI * 2,
+                    duration: 30,
+                    repeat: -1,
+                    ease: "none"
+                });
+
+                scene.add(sponsorPlane);
+                sponsorObjects.push(sponsorPlane);
+            });
+        }
+
+        function onMouseMove(event) {
+            // Normalize mouse position to [-1, 1]
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Update the picking ray with the camera and mouse position
+            raycaster.setFromCamera(mouse, camera);
+
+            // Calculate objects intersecting the ray
+            const intersects = raycaster.intersectObjects(sponsorObjects);
+
+            if (intersects.length > 0) {
+                if (INTERSECTED != intersects[0].object) {
+                    if (INTERSECTED) {
+                         gsap.to(INTERSECTED.scale, { x: 1, y: 1, z: 1, duration: 0.3 });
+                    }
+                    INTERSECTED = intersects[0].object;
+                    gsap.to(INTERSECTED.scale, { x: 1.2, y: 1.2, z: 1.2, duration: 0.3 });
+                }
+            } else {
+                if (INTERSECTED) {
+                    gsap.to(INTERSECTED.scale, { x: 1, y: 1, z: 1, duration: 0.3 });
+                }
+                INTERSECTED = null;
+            }
+
+            // Animate the camera with a subtle parallax effect
+            camera.position.x += (mouse.x * 2 - camera.position.x) * 0.05;
+            camera.position.y += (-mouse.y * 2 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        // Wait for the window to load before initializing
+        window.onload = function() {
+            init();
+            animate();
+            
+            // --- GSAP ANIMATIONS ---
+
+            // Marquee scrolling animation
+            const marquee = gsap.to(".marquee", {
+                xPercent: -50,
+                repeat: -1,
+                ease: "linear",
+                duration: 10,
+            });
+
+            // Marquee hover effect
+            document.querySelectorAll(".sponsor-logo").forEach((logo) => {
+                logo.addEventListener("mouseenter", () => {
+                    gsap.to(logo, { scale: 1.2, duration: 0.3, zIndex: 10, y: -5 });
+                    marquee.pause();
+                });
+                logo.addEventListener("mouseleave", () => {
+                    gsap.to(logo, { scale: 1, duration: 0.3, zIndex: 1, y: 0 });
+                    marquee.resume();
+                });
+            });
+
+            // GSAP ScrollTrigger animation for the sponsor cards
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.from(".sponsor-card", {
+                scrollTrigger: {
+                    trigger: ".sponsor-card",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 0,
+                y: 50,
+                stagger: 0.2,
+                duration: 1,
+                ease: "power2.out"
+            });
+            
+            // GSAP mousemove animation for the main title
+            document.addEventListener('mousemove', (e) => {
+                const title = document.getElementById('main-title');
+                const x = (e.clientX / window.innerWidth - 0.5) * 10;
+                const y = (e.clientY / window.innerHeight - 0.5) * 10;
+                gsap.to(title, {
+                    x: x,
+                    y: y,
+                    duration: 0.5,
+                    ease: "power1.out"
+                });
+            });
+        };
+        
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('active');
+    }
+    function toggleDropdown(event, parent) {
+      if (window.innerWidth <= 768) {
+        event.preventDefault();
+        parent.classList.toggle('active');
+      }
+    }
+    document.addEventListener('click', function(event) {
+      const navLinks = document.getElementById('navLinks');
+      const hamburger = document.querySelector('.hamburger');
+      if (window.innerWidth <= 768 &&
+          !navLinks.contains(event.target) &&
+          !hamburger.contains(event.target) &&
+          navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+      }
+    });
+
+
+    </script>
+</body>
+</html>

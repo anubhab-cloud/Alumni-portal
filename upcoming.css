@@ -1,0 +1,70 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+
+/* Coming Soon Section */
+.coming-soon {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.coming-soon h1 {
+  font-size: 60px;
+  margin-bottom: 20px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.coming-soon p {
+  font-size: 20px;
+  margin-bottom: 40px;
+  color: #ddd;
+}
+
+.countdown {
+  display: flex;
+  gap: 30px;
+}
+
+.countdown div {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.countdown span {
+  display: block;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.countdown small {
+  font-size: 14px;
+  color: #bbb;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

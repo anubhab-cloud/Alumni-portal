@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Teams | Alumni Golden Valley</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        *,
+        ::before,
+        ::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            background-color: #030a26;
+            color: #fff;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ====== NAVBAR ====== */
+       nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #16245f70;
+      padding: 17px 22px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 38px;
+      margin-right: 0px;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .logo-text span:first-child {
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
+
+    .logo-text span:last-child {
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: right 0.3s ease;
+    }
+
+    .nav-links li {
+      position: relative;
+    }
+
+    .nav-links li:last-child {
+      margin-left: 280px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      padding: 8px 12px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: rgba(0, 175, 239, 0.961);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background: #1a1a1a;
+      border-radius: 6px;
+      min-width: 160px;
+      z-index: 1001;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      color: white;
+      font-weight: 500;
+    }
+
+    .dropdown-content a:hover {
+      background: #333;
+    }
+
+    .nav-links li:hover .dropdown-content {
+      display: block;
+    }
+
+    .login-btn {
+      background: rgb(0, 170, 255);
+      color: white;
+      font-weight: 700;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .login-btn:hover {
+      background: #c70000;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+    }
+        @keyframes continuous-rotate {
+            from {
+                transform: scale(0.8) rotate(0deg);
+            }
+            to {
+                transform: scale(0.8) rotate(360deg);
+            }
+        }
+
+        /* ====== PROFILE ROUND ANIMATION SECTION ====== */
+        .profile-animation-section {
+            background-color: #000;
+            min-height: 100vh;
+            display: grid;
+            place-content: center;
+            padding: 50px 20px;
+            overflow: hidden;
+        }
+        
+        .circle-wrapper {
+            border: 1px solid #0f3e5d;
+            position: relative;
+            border-radius: 9999px;
+            display: grid;
+            width: 450px;
+            height: 450px;
+            grid-template-areas: "stack";
+            place-content: center;
+            transform: scale(0.8);
+            animation: continuous-rotate 60s linear infinite;
+        }
+
+        .circle-wrapper:hover {
+            animation-play-state: paused;
+        }
+        
+        .circle-wrapper input[type="radio"] {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        
+        .circle-wrapper label {
+            grid-area: stack;
+            width: 5rem;
+            height: 5rem;
+            border-radius: 9999px;
+            border: 1px solid #738088;
+            display: grid;
+            place-content: center;
+            background-color: rgba(255, 255, 255, 0.2);
+            position: relative;
+            color: #87ceeb;
+            font-size: 1.25rem;
+            transition: all 0.5s;
+            cursor: pointer;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+        }
+
+        .circle-wrapper img {
+            border-radius: 9999px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 1s ease-in-out;
+        }
+
+        .circle-wrapper svg {
+            transition: all 0.5s ease-in-out;
+            position: absolute;
+            inset: 0 0 0 -25%;
+            margin: auto;
+            width: 125px;
+            opacity: 0;
+            z-index: -10;
+        }
+
+        .center-element {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            width: 8rem;
+            height: 8rem;
+            background-color: #1b2c36;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            display: grid;
+            place-content: center;
+            text-transform: uppercase;
+            font-weight: 100;
+            letter-spacing: 0.05em;
+            color: #cbd5e0;
+            font-size: 1.125rem;
+        }
+
+        .center-element::before {
+            content: "";
+            position: absolute;
+            top: -1px;
+            right: -1px;
+            bottom: -1px;
+            left: -1px;
+            background-color: #0a4368;
+            border-radius: 50%;
+            z-index: -10;
+            transition: all 1s;
+        }
+
+        .circle-wrapper input:checked+label {
+            transform: none !important;
+            transition-duration: 1s;
+        }
+
+        .circle-wrapper input:checked+label>img {
+            transform: scale(2);
+        }
+        
+        .circle-wrapper input:checked+label>svg {
+            opacity: 1;
+            transform: scale(2.25) rotate(45deg);
+            transition-delay: 700ms, 500ms, 2000ms;
+        }
+        
+        .avatar {
+            --radius: 14rem;
+            --d: calc(var(--i) / var(--total));
+            --r-offset: -0.15turn;
+            --r-amount: 1turn;
+            --r: calc((var(--r-amount) * var(--d)) + var(--r-offset));
+            transform: rotate(var(--r)) translate(var(--radius)) rotate(calc(-1 * var(--r)));
+        }
+
+        /* ====== TEAM SECTIONS ====== */
+        .teams-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #00aaff, #0055ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #00aaff, #0055ff);
+            border-radius: 2px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #ccc;
+            margin-bottom: 50px;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .team-category {
+            margin-bottom: 60px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, #00aaff, #0055ff);
+            border-radius: 2px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 85, 255, 0.2);
+        }
+
+        .member-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+            border: 4px solid rgba(0, 170, 255, 0.3);
+        }
+
+        .member-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .team-member:hover .member-img img {
+            transform: scale(1.1);
+        }
+
+        .member-info {
+            padding: 0;
+            text-align: center;
+            color: #fff;
+        }
+
+        .member-name {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            color: #00aaff;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #00aaff;
+            transform: translateY(-3px);
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .core-team .category-title::after { background: #ff3366; }
+        .core-team .member-role { color: #ff3366; }
+        .core-team .social-links a:hover { background: #ff3366; }
+
+        .tech-team .category-title::after { background: #00cc99; }
+        .tech-team .member-role { color: #00cc99; }
+        .tech-team .social-links a:hover { background: #00cc99; }
+
+
+        /* ====== FOOTER ====== */
+        footer {
+            background: #0a0a1a;
+            padding: 50px 80px;
+            color: #ccc;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-col {
+            flex: 1;
+            margin: 15px;
+            min-width: 250px;
+        }
+        
+        .footer-col h3 {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .footer-col p, .footer-col a {
+            color: #aaa;
+            font-size: 15px;
+        }
+        
+        .footer-col a:hover {
+            color: #00aaff;
+        }
+        
+        .social-icons a {
+            margin-right: 12px;
+            font-size: 20px;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: #00aaff;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #333;
+            margin-top: 30px;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        /* ====== RESPONSIVE DESIGN ====== */
+        @media (max-width: 992px) {
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            
+            .page-title { font-size: 2.2rem; }
+            .category-title { font-size: 1.8rem; }
+          
+        }
+        
+          @media (max-width: 1200px) {
+      .nav-links li:last-child {
+        margin-left: 150px;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .nav-links li:last-child {
+        margin-left: 50px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 65px;
+        right: -100%;
+        flex-direction: column;
+        background: #000;
+        width: 220px;
+        height: calc(100vh - 65px);
+        padding: 20px;
+        overflow-y: auto;
+        gap: 0;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links li {
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      .nav-links li:last-child {
+        margin-left: 0;
+        margin-top: 20px;
+      }
+
+      .dropdown-content {
+        position: static;
+        display: none;
+        margin-top: 10px;
+        margin-left: 20px;
+        width: calc(100% - 20px);
+      }
+
+      .nav-links li.active .dropdown-content {
+        display: block;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+      footer{
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 576px) {
+      nav {
+        padding: 10px 15px;
+      }
+      .logo img {
+        height: 35px;
+      }
+      .logo-text span:first-child {
+        font-size: 1rem;
+      }
+      .logo-text span:last-child {
+        font-size: 0.75rem;
+      }
+      footer{
+        text-align: center;
+      }
+    }
+
+      
+        @media (max-width: 576px) {
+            .circle-wrapper {
+                /* --- FIX: USE THE DEDICATED MOBILE ANIMATION --- */
+                animation-name: continuous-rotate-mobile;
+            }
+            .page-title { font-size: 1.8rem; }
+            .category-title { font-size: 1.6rem; }
+            .team-category { padding: 20px 15px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+  <nav>
+    <div class="logo">
+      <img src="logoo.png"  alt="Logo">
+      <div class="logo-text">
+        <span>Alumni</span>
+        <span>Golden Valley</span>
+      </div>
+    </div>
+
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li>
+        <a href="#" onclick="toggleDropdown(event, this.parentNode)">About</a>
+        <div class="dropdown-content">
+          <a href="about-alumni.html">About Alumni</a>
+          <a href="about-us.html">About Team</a>
+        </div>
+      </li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="schedule.html">Schedule</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li>
+        <a href="#" onclick="toggleDropdown(event, this.parentNode)">Gallery</a>
+        <div class="dropdown-content">
+          <a href="past-gallery.html">Past Events</a>
+          <a href="ongoing-gallery.html">Current Event</a>
+        </div>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.html"><button class="login-btn">Login</button></a></li>
+    </ul>
+  </nav>
+    
+    <!-- Profile Round Animation Section -->
+    <section class="profile-animation-section" style="background-color: #030a26;">
+        <div style="--total: 8" class="circle-wrapper">
+            <div class="center-element">The Team</div>
+            
+            <input type="radio" name="radio-avatar" id="radio-avatar-1" />
+            <label id="avatar-1" for="radio-avatar-1" class="avatar" style="--i: 1">
+                <img src="team2.jpeg" alt="John Smith">
+                <svg viewBox="0 0 300 300"><text fill="currentColor"><textPath href="#circlePath">John Smith - President</textPath></text></svg>
+            </label>
+
+            <input type="radio" name="radio-avatar" id="radio-avatar-2" />
+            <label id="avatar-2" for="radio-avatar-2" class="avatar" style="--i: 2">
+                <img src="team.jpeg" alt="Sarah Johnson">
+                <svg viewBox="0 0 300 300"><text fill="currentColor"><textPath href="#circlePath">Sarah Johnson - VP</textPath></text></svg>
+            </label>
+
+            <input type="radio" name="radio-avatar" id="radio-avatar-3" />
+            <label id="avatar-3" for="radio-avatar-3" class="avatar" style="--i: 3">
+                <img src="team.jpeg" alt="Michael Brown">
+                 <svg viewBox="0 0 300 300"><text fill="currentColor"><textPath href="#circlePath">Michael Brown - Secretary</textPath></text></svg>
+            </label>
+
+            <input type="radio" name="radio-avatar" id="radio-avatar-4" />
+            <label id="avatar-4" for="radio-avatar-4" class="avatar" style="--i: 4">
+                <img src="team.jpeg" alt="Alex Chen">
+                 <svg viewBox="0 0 300 300"><text fill="currentColor"><textPath href="#circlePath">Alex Chen - Tech Lead</textPath></text></svg>
+            </label>
+            
+            <input type="radio" name="radio-avatar" id="radio-avatar-5" />
+            <label id="avatar-5" for="radio-avatar-5" class="avatar" style="--i: 5">
+                <img src="team2.jpeg" alt="Emily Williams">
+                <svg viewBox="0 0 300 300"><text fill="currentColor"><textPath href="#circlePath">Emily Williams - Cultural Lead</textPath></text></svg>
+            </label>
+
+            <input type="radio" name="radio-avatar" id="radio-avatar-6" />
+            <label id="avatar-6" for="radio-avatar-6" class="avatar" style="--i: 6">
+                <img src="team2.jpeg" alt="Robert Taylor">
+                <svg viewBox="0 0 300 300"><text fill="currentColor"><textPath href="#circlePath">Robert Taylor - Finance Lead</textPath></text></svg>
+            </label>
+
+            <input type="radio" name="radio-avatar" id="radio-avatar-7" />
+            <label id="avatar-7" for="radio-avatar-7" class="avatar" style="--i: 7">
+                <img src="team2.jpeg" alt="Carlos Mendez">
+                 <svg viewBox="0 0 300 300"><text fill="currentColor"><textPath href="#circlePath">Carlos Mendez - Photography</textPath></text></svg>
+            </label>
+
+            <input type="radio" name="radio-avatar" id="radio-avatar-8" />
+            <label id="avatar-8" for="radio-avatar-8" class="avatar" style="--i: 8">
+                <img src="team2.jpeg" alt="Daniel Brown">
+                 <svg viewBox="0 0 300 300"><text fill="currentColor"><textPath href="#circlePath">Daniel Brown - Sponsor Lead</textPath></text></svg>
+            </label>
+
+        </div>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="0" height="0">
+            <defs>
+                <path id="circlePath" d="M 150, 150 m -100, 0 a 100,100 0 0,1 200,0 a 100,100 0 0,1 -200,0" />
+            </defs>
+        </svg>
+    </section>
+
+    <!-- Teams Container -->
+    <div class="teams-container">
+        <h1 class="page-title">Our Amazing Team</h1>
+        <p class="page-subtitle">Meet the dedicated individuals who work tirelessly to make our alumni community vibrant and connected.</p>
+
+        <!-- Core Team -->
+        <section class="team-category core-team">
+            <h2 class="category-title">Core Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80" alt="President"></div>
+                    <div class="member-info">
+                        <h3 class="member-name">John Smith</h3>
+                        <p class="member-role">President</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=776&q=80" alt="Vice President"></div>
+                    <div class="member-info">
+                        <h3 class="member-name">Sarah Johnson</h3>
+                        <p class="member-role">Vice President</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80" alt="Secretary"></div>
+                    <div class="member-info">
+                        <h3 class="member-name">Michael Brown</h3>
+                        <p class="member-role">Secretary</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Team -->
+        <section class="team-category tech-team">
+            <h2 class="category-title">Tech Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-img"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80" alt="Tech Lead"></div>
+                    <div class="member-info">
+                        <h3 class="member-name">Alex Chen</h3>
+                        <p class="member-role">Tech Lead</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-github"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="member-img"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=761&q=80" alt="Tech Co-Lead"></div>
+                    <div class="member-info">
+                        <h3 class="member-name">Priya Patel</h3>
+                        <p class="member-role">Tech Co-Lead</p>
+                        <div class="social-links">
+                           <a href="#"><i class="fab fa-github"></i></a>
+                           <a href="#"><i class="fab fa-twitter"></i></a>
+                           <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="member-img"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=776&q=80" alt="Tech Assistant"></div>
+                    <div class="member-info">
+                        <h3 class="member-name">Maria Rodriguez</h3>
+                        <p class="member-role">Tech Assistant</p>
+                        <div class="social-links">
+                           <a href="#"><i class="fab fa-github"></i></a>
+                           <a href="#"><i class="fab fa-twitter"></i></a>
+                           <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-col">
+            <h3><i class="fas fa-rocket"></i> Alumni Association</h3>
+            <p>A community built on shared memories and future aspirations.</p>
+        </div>
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <p><a href="#">Home</a></p>
+            <p><a href="#">Events</a></p>
+            <p><a href="#">Gallery</a></p>
+        </div>
+        <div class="footer-col">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-envelope"></i> sample@gmail.com</p>
+            <p><i class="fas fa-phone"></i> +91 8732016798</p>
+        </div>
+        <div class="footer-col">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/gvhs.alumni/"><i class="fab fa-facebook fa-beat" style="color: #1a5eff;"></i></a>
+                <a href="https://www.youtube.com/@gvhsalumniofficial3726"><i class="fa-brands fa-youtube fa-beat" style="color: rgb(157, 5, 5);"></i></a>
+                <a href="https://www.linkedin.com/in/atanu-roy-ab1618339?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin fa-beat" style="color: #23a4e9;"></i></a>
+                <a href="https://www.instagram.com/alumnigoldenvalley/"><i class="fab fa-instagram fa-beat" style="color: #fff;"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            ©Alumni Association GVHS 2025. All rights reserved.
+        </div>
+    </footer>
+ <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2025/08/30/19/20250830190753-XP3BMBNB.js"></script>
+    <script>
+      // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navLinks.classList.toggle('active');
+    });
+
+    // Close nav when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+        navLinks.classList.remove('active');
+      }
+    });
+
+    // Dropdown toggle in mobile
+    function toggleDropdown(e, element) {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        element.classList.toggle("active");
+      }
+    }
+
+        // Uncheck radio buttons for profile animation (Corrected)
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('click', (e) => {
+                e.preventDefault();
+                // A timeout is needed to allow the radio button to be toggled correctly
+                setTimeout(() => {
+                    radio.checked = !radio.checked;
+                }, 0);
+            });
+        });
+    </script>
+</body>
+</html>
+
+

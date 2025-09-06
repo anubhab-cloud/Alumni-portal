@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upcoming Event</title>
+  <link rel="stylesheet" href="upcoming.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="logo.png" alt="logo">
+      <span>Alumni</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Schedule</a></li>
+      <li><a href="#">Sponsors</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <a href="login.html" class="login-btn">Login</a>
+  </nav>
+
+  <!-- Coming Soon Section -->
+  <section class="coming-soon">
+    <h1>🚀 Coming Soon</h1>
+    <p>Our next big event is on the way. Stay tuned for updates!</p>
+    <div class="countdown">
+      <div><span id="days">00</span><small>Days</small></div>
+      <div><span id="hours">00</span><small>Hours</small></div>
+      <div><span id="minutes">00</span><small>Minutes</small></div>
+      <div><span id="seconds">00</span><small>Seconds</small></div>
+    </div>
+  </section>
+
+  <script>
+    // Countdown Example (set your event date here)
+    const eventDate = new Date("2025-09-20T00:00:00").getTime();
+
+    const timer = setInterval(function(){
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      if(distance < 0){
+        clearInterval(timer);
+        document.querySelector(".coming-soon p").innerHTML = "The event has started!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000*60*60*24));
+      const hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+      const minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+      const seconds = Math.floor((distance % (1000*60))/1000);
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+    }, 1000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Alumni - GVHS</title>
+
+  <!-- FontAwesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0b0b0d;
+  --bg-2: #0f0f14;
+  --card: #121218;
+  --text: #f4f6f8;
+  --muted: #a6adbb;
+  --brand: #e11d48;
+  --brand-2: #fb7185;
+  --radius: 1.25rem;
+  --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+  --max: 1200px;
+}
+
+body {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background-color: #030a26;
+  color: var(--text);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Container */
+.container {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding: clamp(16px, 2vw, 28px);
+}
+
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #16245f70;
+  padding: 17px 22px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 38px;
+  margin-right: 6px;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.logo-text span:first-child {
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.logo-text span:last-child {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-links li:last-child {
+  margin-left: auto;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 8px 12px;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: rgba(0, 175, 239, 0.961);
+}
+
+/* Dropdown */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: #1a1a1a;
+  border-radius: 6px;
+  min-width: 160px;
+  z-index: 1001;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px;
+  color: white;
+  font-weight: 500;
+}
+
+.dropdown-content a:hover {
+  background: #333;
+}
+
+.nav-links li:hover .dropdown-content {
+  display: block;
+}
+
+/* Buttons */
+.login-btn {
+  background: rgb(0, 170, 255);
+  color: white;
+  font-weight: 700;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background: #c70000;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  overflow: hidden;
+  height: auto;
+  padding: 60px 20px;
+}
+
+.hero .container {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(20px, 4vw, 60px);
+  align-items: center;
+  max-width: 1400px;
+}
+
+.hero-visual {
+  position: relative;
+  aspect-ratio: 1/1;
+  border-radius: 28px;
+  background: linear-gradient(160deg, rgba(238, 231, 233, 0.15), rgb(233, 227, 228));
+  border: 1px solid rgba(231, 220, 220, 0.08);
+  box-shadow: var(--shadow);
+  max-width: 650px;
+  width: 100%;
+  justify-self: center;
+}
+
+.hero-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.tag {
+  display: inline-flex;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(238, 234, 235, 0.12);
+  border: 1px solid rgba(111, 167, 223, 0.885);
+}
+
+.headline {
+  font-size: clamp(28px, 4.6vw, 54px);
+  font-weight: 900;
+  margin-top: 15px;
+}
+
+.sub {
+  background-color: rgba(119, 157, 240, 0.341);
+  padding: 10px 20px;
+  border: 2px solid #89c6d7;
+  border-top-left-radius: 12%;
+  border-bottom-right-radius: 12%;
+  margin-top: 20px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Section basics */
+section {
+  padding: 60px 20px;
+}
+
+.section-title {
+  font-size: clamp(22px, 3.2vw, 36px);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-sub {
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Grids */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* Cards */
+.card, .value {
+  background: rgba(7, 51, 182, 0.228);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(246, 245, 245, 0.45);
+  transition: transform 0.3s ease;
+}
+
+.card:hover, .value:hover {
+  transform: translateY(-5px);
+}
+
+.card h3, .value h3 {
+  margin-bottom: 12px;
+  font-size: 1.3rem;
+  color: #00c8ff;
+}
+
+/* Features */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.feature .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffcc00;
+  margin-top: 5px;
+}
+
+/* Contact Section */
+.contact-section {
+  padding: 100px 20px;
+  background: linear-gradient(to bottom, #1a1a1a, #000);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('contactbg.jpg') center/cover no-repeat;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.contact-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.contact-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #54b3d3;
+}
+
+.contact-content p {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  max-width: 700px;
+  margin-inline: auto;
+}
+
+.contact-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.contact-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 30px;
+  width: 250px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid rgba(255, 204, 0, 0.3);
+}
+
+.contact-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(255, 204, 0, 0.2);
+}
+
+.contact-icon {
+  font-size: 2.5rem;
+  color: #6da1ea;
+  margin-bottom: 20px;
+}
+
+.contact-card h3 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.contact-btn {
+  display: inline-block;
+  padding: 12px 25px;
+  background: #012485;
+  color: white;
+  border-radius: 30px;
+  transition: all 0.3s;
+}
+
+.contact-btn:hover {
+  background: #ffcc00;
+  color: #000;
+  transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+  background: #0a0a1a;
+  padding: 50px 80px;
+  color: #ccc;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-col {
+  flex: 1;
+  margin: 15px;
+  min-width: 250px;
+}
+
+.footer-col h3 {
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.footer-col p, .footer-col a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.footer-col a:hover {
+  color: red;
+}
+
+.social-icons a {
+  margin-right: 12px;
+  font-size: 20px;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: red;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #333;
+  margin-top: 30px;
+  font-size: 14px;
+  width: 100%;
+}
+    /* Responsive Design */
+/* Tablets */
+
+/* ========= RESPONSIVE MEDIA QUERIES ========= */
+
+/* Tablets */
+@media (max-width: 992px) {
+  .hero .container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-visual {
+    max-width: 80%;
+    margin: 20px auto;
+  }
+  .headline {
+    font-size: 2.2rem;
+  }
+  .sub {
+    font-size: 1rem;
+  }
+  .nav-links li:last-child {
+    margin-left: 0;
+  }
+}
+
+/* Mobile menu */
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 65px;
+    right: -100%;
+    flex-direction: column;
+    background: #0a0a0a;
+    width: 250px;
+    height: calc(100vh - 65px);
+    padding: 25px 20px;
+    transition: right 0.3s ease-in-out;
+    overflow-y: auto;
+  }
+  .nav-links.active {
+    right: 0;
+  }
+  .nav-links a {
+    display: block;
+    padding: 12px;
+    font-size: 1rem;
+    border-bottom: 1px solid #222;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .hero-visual {
+    width: 100%;
+    max-width: 400px;
+  }
+  .contact-cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+  }
+}
+
+/* Small mobiles */
+@media (max-width: 576px) {
+  .headline {
+    font-size: 1.6rem;
+  }
+  .sub {
+    font-size: 0.9rem;
+    padding: 8px;
+    margin-top: 10px;
+  }
+  .tag {
+    font-size: 0.8rem;
+    padding: 5px 12px;
+  }
+  .contact-content h2 {
+    font-size: 2rem;
+  }
+  .contact-content p {
+    font-size: 1rem;
+  }
+  .section-title {
+    font-size: 1.5rem;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR (from your previous response) -->
+<!-- Navbar -->
+    <nav>
+        <div class="logo">
+            <img src="logoo.png" alt="Logo">
+            <div class="logo-text">
+                <span>Alumni</span>
+                <span>Golden Valley</span>
+            </div>
+        </div>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <a href="#" onclick="toggleDropdown(event, this.parentNode)">About</a>
+                <div class="dropdown-content">
+                    <a href="about-alumni.html">About Alumni</a>
+                    <a href="about-us.html">About Team</a>
+                </div>
+            </li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="sponsors.html">Sponsors</a></li>
+            <li>
+                <a href="#" onclick="toggleDropdown(event, this.parentNode)">Gallery</a>
+                <div class="dropdown-content">
+                    <a href="past-gallery.html">Past Events</a>
+                    <a href="ongoing-gallery.html">Current Event</a>
+                </div>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html"><button class="login-btn">Login</button></a></li>
+        </ul>
+    </nav>
+  <!-- HERO -->
+   <div class="upper" style="padding: 50px;"></div>
+
+  <header class="hero">
+    <div class="container">
+      <div>
+        <span class="tag parallax" data-parallax="8">Independent • Community • Ideas</span>
+        <h1 class="headline parallax" data-parallax="14" style="color: yellow;">Who we are</h1>
+        <p class="sub parallax" data-parallax="20" style="font-weight: 500; letter-spacing: 3px;">
+We are the Golden Valley HS School Alumni Association, a network of thoughts united by a shared history and a common purpose. We are here to create a sense of shared experience and instant connection, offering a strong support system and a place to maintain friendships.
+
+Beyond simply staying connected, we aim to celebrate achievements, support professional growth, and provide opportunities for collaboration.
+        </p>
+      </div>
+      <div class="hero-visual reveal">
+        <img src="homebg.jpg" alt="Hero" style="width:100%; height:100%; object-fit:cover; border-radius:24px;"/>
+        <div class="orb"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- WHO WE ARE -->
+  <section>
+    <div class="container">
+      <h2 class="section-title reveal" style="color: yellow;">GOLDEN VALLEY HS SCHOOL</h2>
+      <p class="section-sub reveal">
+
+Founded on 30th June 1989, Golden Valley H.S. School stands as a premier institution in the heart of Dharmanagar, North Tripura. What began as a small initiative has grown into a vibrant community of 1500+ students, 30 teachers, and 6 support staff, committed to excellence in academics and character building. Our mission is to nurture students with knowledge, skills, and values to face real-life challenges and contribute positively to society.</p>
+    </div>
+  </section>
+    <!-- MISSION & VISION -->
+  <section id="mission">
+    <div class="container">
+      <h2 class="section-title reveal" style="color: yellow;">Mission & Vision</h2>
+      <div class="grid-2 reveal-stagger">
+        <article class="card" style="background-color: rgb(35, 2, 2); text-shadow: 12px white;">
+          <h3>Our Mission</h3>
+          <p>to foster lifelong relationships between the institution and its graduates, creating a vibrant community that benefits both current students and the school itself.</p>
+        </article>
+        <article class="card"style="background-color: rgb(35, 2, 2); text-shadow: 12px white;">
+          <h3>Our Vision</h3>
+          <p>becoming a global, interconnected community that fosters lifelong connections between the institution and its graduates, creating a network of loyalty, mentorship, and mutual support to enhance academic excellence, promote professional growth, and give back to current students, the school, and society at large.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section id="values">
+    <div class="container">
+      <h2 class="section-title reveal" style="color: yellow;">Our Values</h2>
+      <div class="grid-3 reveal-stagger">
+        <div class="value">
+          <h3>Community and Belonging</h3>
+          <p>Alumni groups create a sense of shared experience and instant connection, offering a strong support system and a place to maintain friendships. </p>
+        </div>
+        <div class="value">
+          <h3>Mentorship and Guidance</h3>
+          <p>Experienced alumni can provide valuable insights, advice, and guidance for navigating career challenges and achieving personal growth. </p>
+        </div>
+        <div class="value">
+          <h3>Professional Networking</h3>
+          <p>Groups organize events and platforms that connect graduates with experienced professionals, industry leaders, and other alumni for career growth and collaboration. </p>
+        </div>
+        <div class="value">
+          <h3>Lifelong Learning</h3>
+          <p>Alumni can access tailored learning programs, academic networks, and the prestige of their alma mater's reputation, which enhances career success. </p>
+        </div>
+        <div class="value">
+          <h3>Community & Social Responsibility</h3>
+          <p>By mentoring younger people, alumni demonstrate a positive influence on their communities and contribute to the enhancement of their alma mater's social unity</p>
+        </div>
+        <div class="value">
+          <h3>Integrity</h3>
+          <p>Alumni groups act as a bridge, connecting the past, present, and future, ensuring a lasting relationship between graduates and their educational institution. </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <section id="highlights">
+    <div class="container">
+      <h2 class="section-title reveal" style="color: yellow;">What to Expect</h2>
+      <p class="section-sub reveal">Networking and Professional Connections.</p>
+      <div class="features reveal-stagger" style="margin-top:18px">
+        <div class="feature"><span class="dot"></span><div><strong>Engaging speakers</strong><br/>From diverse backgrounds and disciplines.</div></div>
+        <div class="feature"><span class="dot"></span><div><strong>Community and</strong><br/>Social Events</div></div>
+        <div class="feature"><span class="dot"></span><div><strong>Meaningful connections</strong><br/>Personal Growth</div></div>
+        <div class="feature"><span class="dot"></span><div><strong>Local culture</strong><br/>A celebration of creativity and innovation.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+    <!-- Creative Contact Section -->
+    <section class="contact-section">
+        <div class="contact-content">
+            <h2>Get in Touch</h2>
+            <p>We'd love to hear from you. Reach out for collaborations, queries, or just to say hello. Our team is always ready to connect with fellow alumni and partners.</p>
+            
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Call Us</h3>
+                    <p>+91 8732016798</p>
+                    <a href="tel:+918732016798" class="contact-btn">Call Now</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Us</h3>
+                    <p>sample@gmail.com </p>
+                    <a href="mailto:sample@gmail.com" class="contact-btn">Send Email</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Visit Us</h3>
+                    <p>Padmapur, Tripura</p>
+                    <a href="https://maps.app.goo.gl/3qdrLz4HZDjSQ4gy6" class="contact-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+ <footer>
+        <div class="footer-col">
+            <h3><i class="fas fa-rocket"></i> Alumni Association</h3>
+            <p>Alumni are not just former students, they are the living embodiment of an institution's achievements and values</p>
+        </div>
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <p><a href="index.html">Home</a></p>
+            <p><a href="events.html">Events</a></p>
+            <p><a href="schedule.html">Schedule</a></p>
+            <p><a href="sponsors.html">Sponsors</a></p>
+        </div>
+        <div class="footer-col">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-envelope"></i> sample@gmail.com</p>
+            <a href="tel:+918732016798"><p><i class="fas fa-phone"></i> +91 8732016798</p></a>
+            <a href="https://maps.app.goo.gl/3qdrLz4HZDjSQ4gy6"><p><i class="fas fa-map-marker-alt"></i> PADMAPUR | DHARMANAGAR | TRIPURA</p></a>
+        </div>
+        <div class="footer-col">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/gvhs.alumni/"><i class="fab fa-facebook fa-beat" style="color: #1a5eff;"></i></a>
+                <a href="https://www.youtube.com/@gvhsalumniofficial3726"><i class="fa-brands fa-youtube fa-beat" style="color: rgb(157, 5, 5);"></i></a>
+                <a href="https://www.linkedin.com/in/atanu-roy-ab1618339?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin fa-beat" style="color: #23a4e9;"></i></a>
+                <a href="https://www.instagram.com/alumnigoldenvalley/"><i class="fab fa-instagram fa-beat" style="color: #fff;"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            ©Alumni Association GVHS 2025. All rights reserved.
+        </div>
+    </footer>
+    
+    
+     <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/08/30/19/20250830190753-XP3BMBNB.js"></script>
+  <script>
+    // Hamburger menu
+    function toggleMenu(){ 
+      document.getElementById('navLinks').classList.toggle('active'); 
+    }
+
+    // Mobile dropdown toggle
+    function toggleDropdown(event, parent) {
+      if (window.innerWidth <= 768) {
+        event.preventDefault();
+        parent.classList.toggle('active');
+      }
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const navLinks = document.getElementById('navLinks');
+      const hamburger = document.querySelector('.hamburger');
+      
+      if (window.innerWidth <= 768 && 
+          !navLinks.contains(event.target) && 
+          !hamburger.contains(event.target) &&
+          navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+      }
+    });
+
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.15});
+    revealEls.forEach(el=> io.observe(el));
+  </script>
+  <script type="module">
+    import {protectContent} from "./auth-project.js";
+    protectContent();
+  </script>
+</body>
+</html>

@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alumni.Events</title>
+   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Internal CSS -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #030a26;
+    }
+
+  nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #16245f70;
+            padding: 12px 22px;
+            position: sticky;
+            top: 0;
+            color: white;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 38px;
+            margin-right: 0px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-text span:first-child {
+            font-size: 1.2rem;
+            font-weight: 900;
+        }
+
+        .logo-text span:last-child {
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links li:last-child {
+            margin-left: 280px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 8px 12px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: rgba(0, 175, 239, 0.961);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 110%;
+            left: 0;
+            background: #1a1a1a;
+            border-radius: 6px;
+            min-width: 160px;
+            z-index: 1001;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .dropdown-content a:hover {
+            background: #333;
+        }
+
+        .nav-links li:hover .dropdown-content {
+            display: block;
+        }
+
+      .login-btn {
+            background: rgb(0, 170, 255);
+            color: white;
+            font-weight: 700;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #c70000;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+        }
+
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 65px;
+        right: -100%;
+        flex-direction: column;
+        background: #000;
+        width: 220px;
+        height: calc(100vh - 65px);
+        padding: 20px;
+        transition: right 0.3s ease;
+        overflow-y: auto;
+        gap: 0;
+      }
+      
+      .nav-links.active {
+        right: 0;
+        display: flex;
+      }
+      
+      .nav-links li {
+        width: 100%;
+        margin: 10px 0;
+      }
+      
+      .nav-links li:last-child {
+        margin-left: 0;
+        margin-top: 20px;
+      }
+      
+      .dropdown-content {
+        position: static;
+        display: none;
+        margin-top: 10px;
+        margin-left: 20px;
+        width: calc(100% - 20px);
+      }
+      
+      .nav-links li:hover .dropdown-content {
+        display: none;
+      }
+      
+      .nav-links li.active .dropdown-content {
+        display: block;
+      }
+      
+      .hamburger {
+        display: flex;
+      }
+    }
+    /* Mobile Menu */
+    @media (max-width: 768px) {
+      .menu {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        width: 200px;
+        border-radius: 6px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        padding: 10px;
+      }
+      .menu li {
+        margin: 10px 0;
+      }
+      .hamburger {
+        display: flex;
+        z-index: 10000;
+      }
+      .menu.active {
+        display: flex;
+      }
+      .dropdown-content {
+        position: static;
+        box-shadow: none;
+        border-radius: 0;
+        z-index: 1000;
+      }
+      footer{
+        text-align: center;
+      }
+    }
+
+        /* Container for all event cards */
+    .events-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 100px 20px 40px; /* leave space for navbar */
+    }
+
+    /* Each event card */
+    .event-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-10px);
+    }
+
+    /* Event card image */
+    .event-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: 0.4s ease;
+    }
+
+    .event-card:hover img {
+      filter: brightness(60%);
+      transform: scale(1.05);
+    }
+
+    /* Overlay for registration button */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .event-card:hover .overlay {
+      opacity: 1;
+    }
+
+    /* Registration button */
+    .event-card .register-btn {
+      background: #ff9800;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #fff;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .register-btn:hover {
+      background: #e68900;
+      transform: scale(1.1);
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 900px) {
+  .events-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 per row on tablets */
+  }
+}
+
+@media (max-width: 600px) {
+  .events-container {
+    grid-template-columns: 1fr; /* 1 per row on mobile */
+  }
+}
+    /* footer {
+      background:#000;
+      padding:60px 20px;
+      margin-top:50px;
+      height: 500px;
+      display:grid;
+      justify-content: space-evenly;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
+
+    footer h3 {
+      margin-bottom:15px;
+      font-weight:900;
+      font-size:x-large;
+    }
+
+    footer p, footer a {
+      color:#aaa;
+      font-size:14px;
+    } */
+
+    /* .socials { display:flex; gap:15px; margin-top:10px; }
+    .socials a { font-size:20px; transition: transform .3s, color .3s; }
+    .socials a:hover { transform: scale(1.2); color:#f39c12; } */
+
+    @media (max-width: 1024px){
+      .hero .container { grid-template-columns:1fr }
+      .hero-visual { order:-1; height: 46vh }
+    }
+      footer {
+      background: #0a0a1a;
+      padding: 50px 80px;
+      color: #ccc;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .footer-col {
+      flex: 1;
+      margin: 15px;
+      min-width: 250px;
+    }
+    .footer-col h3 {
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    .footer-col p, .footer-col a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .footer-col a:hover {
+      color: red;
+    }
+    .social-icons a {
+      margin-right: 12px;
+      font-size: 20px;
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+    .social-icons a:hover {
+      color: red;
+    }
+
+     .footer-bottom {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #333;
+            margin-top: 30px;
+            font-size: 14px;
+            width: 100%;
+        }
+    .hero{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+      padding: 80px;
+      margin-top: 10px;
+    }
+    .hero h1{
+      color: white;
+      justify-content: center;
+      align-items: center;
+      font-size: 4rem;
+      font-weight: 900;
+    text-shadow: 5px 5px 0 #3744bd, 10px 10px 0 #00d4ff;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 5px #ff005e, 0 0 10px #ff005e, 0 0 20px #ff005e, 0 0 40px #ff005e, 0 0 80px #ff005e;
+    }
+    100% {
+        text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff, 0 0 40px #00d4ff, 0 0 80px #00d4ff, 0 0 160px #00d4ff;
+    }
+}
+    @media (max-width: 768px) {
+  .hero {
+    padding: 40px;
+  }
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile (small phones) */
+@media (max-width: 480px) {
+  .hero {
+    padding: 30px;
+  }
+  .hero h1 {
+    font-size: 2rem;
+  }
+}
+   /* Social Icons */
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      color: rgb(242, 245, 249);
+      font-size: 22px;
+      transition: 0.3s ease-in-out;
+    }
+
+    .social-links a:hover {
+      color: #33a0ff;
+      transform: scale(1.2);
+    }
+     .connect-section {
+            background: linear-gradient(135deg, #071f4b, #00aaff,#071f4b);
+            padding: 60px 20px;
+            text-align: center;
+            color: #fff;
+            margin: 40px 0;
+        }
+        .connect-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        .connect-text {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .connect-btn {
+            background: #fff;
+            color: #0077cc;
+            font-weight: 700;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+        .connect-btn:hover {
+            background: #f0f0f0;
+            transform: scale(1.05);
+        }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+ <nav>
+        <div class="logo">
+            <img src="logoo.png" alt="Logo">
+            <div class="logo-text">
+                <span>Alumni</span>
+                <span>Golden Valley</span>
+            </div>
+        </div>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <a href="#" onclick="toggleDropdown(event, this.parentNode)">About</a>
+                <div class="dropdown-content">
+                    <a href="about-alumni.html">About Alumni</a>
+                    <a href="about-us.html">About Team</a>
+                </div>
+            </li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="sponsors.html">Sponsors</a></li>
+            <li>
+                <a href="#" onclick="toggleDropdown(event, this.parentNode)">Gallery</a>
+                <div class="dropdown-content">
+                    <a href="past-gallery.html">Past Events</a>
+                    <a href="ongoing-gallery.html">Current Event</a>
+                </div>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html"><button class="login-btn">Login</button></a></li>
+        </ul>
+    </nav>
+    <div class="hero">
+      <h1> Events of the Night </h1>
+    </div>
+      <div class="events-container">
+    <!-- Example Event Cards -->
+    <div class="event-card">
+      <img src="dance.jpg" alt="Cricket Event">
+      <div class="overlay">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxTB5om86UWUuRkjhKYUGGoueLbc_wx5B8F8m3CSovXh-Rvg/viewform" class="register-btn" target="_blank">Register</a>
+      </div>
+    </div>
+
+    <div class="event-card">
+      <img src="singing.jpg" alt="Football Event">
+      <div class="overlay">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxTB5om86UWUuRkjhKYUGGoueLbc_wx5B8F8m3CSovXh-Rvg/viewform" class="register-btn" target="_blank">Register</a>
+      </div>
+    </div>
+
+    <div class="event-card">
+      <img src="ramp.jpg" alt="Volleyball Event">
+      <div class="overlay">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxTB5om86UWUuRkjhKYUGGoueLbc_wx5B8F8m3CSovXh-Rvg/viewform" class="register-btn" target="_blank">Register</a>
+      </div>
+    </div>
+
+    <div class="event-card">
+      <img src="extrsvsgsnza.png" alt="Basketball Event">
+      <div class="overlay">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxTB5om86UWUuRkjhKYUGGoueLbc_wx5B8F8m3CSovXh-Rvg/viewform" class="register-btn" target="_blank">Register</a>
+      </div>
+    </div>
+    <div class="event-card">
+  <img src="drama.png" alt="Event Name">
+  <div class="overlay">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxTB5om86UWUuRkjhKYUGGoueLbc_wx5B8F8m3CSovXh-Rvg/viewform" class="register-btn" target="_blank">Register</a>
+  </div>
+</div>
+<div class="event-card">
+      <img src="pyramid.png" alt="Basketball Event">
+      <div class="overlay">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxTB5om86UWUuRkjhKYUGGoueLbc_wx5B8F8m3CSovXh-Rvg/viewform" class="register-btn" target="_blank">Register</a>
+      </div>
+    </div>
+    <div class="event-card">
+      <img src="drama.png" alt="Basketball Event">
+      <div class="overlay">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxTB5om86UWUuRkjhKYUGGoueLbc_wx5B8F8m3CSovXh-Rvg/viewform" class="register-btn" target="_blank">Register</a>
+      </div>
+    </div>
+    <div class="event-card">
+      <img src="drama.png" alt="Basketball Event">
+      <div class="overlay">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxTB5om86UWUuRkjhKYUGGoueLbc_wx5B8F8m3CSovXh-Rvg/viewform" class="register-btn" target="_blank">Register</a>
+      </div>
+    </div>
+    <div class="event-card">
+      <img src="drama.png" alt="Basketball Event">
+      <div class="overlay">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxTB5om86UWUuRkjhKYUGGoueLbc_wx5B8F8m3CSovXh-Rvg/viewform" class="register-btn" target="_blank">Register</a>
+      </div>
+    </div>
+
+  </div>
+  
+  <section class="connect-section">
+        <h2 class="connect-title">Let's Connect!</h2>
+        <p class="connect-text">Want to direct contact with us? Tap below to contact instantly with us</p>
+        <a href="sample@gmail.com"><button class="connect-btn">Email Us</button></a>
+    </section>
+
+
+<footer>
+        <div class="footer-col">
+            <h3><i class="fas fa-rocket"></i> Alumni Association</h3>
+            <p>Alumni are not just former students, they are the living embodiment of an institution's achievements and values</p>
+        </div>
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <p><a href="index.html">Home</a></p>
+            <p><a href="events.html">Events</a></p>
+            <p><a href="schedule.html">Schedule</a></p>
+            <p><a href="sponsors.html">Sponsors</a></p>
+        </div>
+        <div class="footer-col">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-envelope"></i> sample@gmail.com</p>
+            <a href="tel:+919xxxxxxxx"><p><i class="fas fa-phone"></i> +91 8732016798</p></a>
+            <a href="https://maps.app.goo.gl/3qdrLz4HZDjSQ4gy6"><p><i class="fas fa-map-marker-alt"></i> PADMAPUR | DHARMANAGAR | TRIPURA</p></a>
+        </div>
+        <div class="footer-col">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/gvhs.alumni/"><i class="fab fa-facebook fa-beat" style="color: #1a5eff;"></i></a>
+                <a href="https://www.youtube.com/@gvhsalumniofficial3726"><i class="fa-brands fa-youtube fa-beat" style="color: rgb(157, 5, 5);"></i></a>
+                <a href="https://www.linkedin.com/in/atanu-roy-ab1618339?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin fa-beat" style="color: #23a4e9;"></i></a>
+                <a href="https://www.instagram.com/alumnigoldenvalley/"><i class="fab fa-instagram fa-beat" style="color: #fff;"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            ©Alumni Association GVHS 2025. All rights reserved.
+        </div>
+    </footer>
+   
+  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2025/08/30/19/20250830190753-XP3BMBNB.js"></script>
+  <!-- JS for toggle -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('menu');
+
+    hamburger.addEventListener('click', () => {
+      menu.classList.toggle('active');
+    });
+       document.addEventListener('click', function(event) {
+      const navLinks = document.getElementById('navLinks');
+      const hamburger = document.querySelector('.hamburger');
+      
+      if (window.innerWidth <= 768 && 
+          !navLinks.contains(event.target) && 
+          !hamburger.contains(event.target) &&
+          navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+      }
+    });
+      function toggleDropdown(event, parent) {
+            if (window.innerWidth <= 768) {
+                event.preventDefault();
+                parent.classList.toggle('active');
+            }
+        }
+
+  </script>
+</script>
+  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

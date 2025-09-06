@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alimnni.gallery-current</title>
+    <link rel="stylesheet" href="upcoming.css">
+    <style>
+           * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+    }
+
+ nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #16245f70;
+            padding: 12px 22px;
+            position: sticky;
+            top: 0;
+            color: white;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 38px;
+            margin-right: 0px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-text span:first-child {
+            font-size: 1.2rem;
+            font-weight: 900;
+        }
+
+        .logo-text span:last-child {
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links li:last-child {
+            margin-left: 280px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 8px 12px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: rgba(0, 175, 239, 0.961);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 110%;
+            left: 0;
+            background: #1a1a1a;
+            border-radius: 6px;
+            min-width: 160px;
+            z-index: 1001;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .dropdown-content a:hover {
+            background: #333;
+        }
+
+        .nav-links li:hover .dropdown-content {
+            display: block;
+        }
+
+      .login-btn {
+            background: rgb(0, 170, 255);
+            color: white;
+            font-weight: 700;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #c70000;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+        }
+
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 65px;
+        right: -100%;
+        flex-direction: column;
+        background: #000;
+        width: 220px;
+        height: calc(100vh - 65px);
+        padding: 20px;
+        transition: right 0.3s ease;
+        overflow-y: auto;
+        gap: 0;
+      }
+      
+      .nav-links.active {
+        right: 0;
+        display: flex;
+      }
+      
+      .nav-links li {
+        width: 100%;
+        margin: 10px 0;
+      }
+      
+      .nav-links li:last-child {
+        margin-left: 0;
+        margin-top: 20px;
+      }
+      
+      .dropdown-content {
+        position: static;
+        display: none;
+        margin-top: 10px;
+        margin-left: 20px;
+        width: calc(100% - 20px);
+      }
+      
+      .nav-links li:hover .dropdown-content {
+        display: none;
+      }
+      
+      .nav-links li.active .dropdown-content {
+        display: block;
+      }
+      
+      .hamburger {
+        display: flex;
+      }
+    }
+    /* Mobile Menu */
+    @media (max-width: 768px) {
+      .menu {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        width: 200px;
+        border-radius: 6px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        padding: 10px;
+      }
+      .menu li {
+        margin: 10px 0;
+      }
+      .hamburger {
+        display: flex;
+        z-index: 10000;
+      }
+      .menu.active {
+        display: flex;
+      }
+      .dropdown-content {
+        position: static;
+        box-shadow: none;
+        border-radius: 0;
+        z-index: 1000;
+      }
+      .coming-soon h1{
+        font-size: larger;
+        font-weight: 900;
+        display: block;
+        padding: 20px 30px;
+        letter-spacing: 9px;
+
+      }
+    }
+      footer {
+      background: #0a0a1a;
+      padding: 50px 80px;
+      color: #ccc;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .footer-col {
+      flex: 1;
+      margin: 15px;
+      min-width: 250px;
+    }
+    .footer-col h3 {
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    .footer-col p, .footer-col a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .footer-col a:hover {
+      color: red;
+    }
+    .social-icons a {
+      margin-right: 12px;
+      font-size: 20px;
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+    .social-icons a:hover {
+      color: red;
+    }
+
+     .footer-bottom {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #333;
+            margin-top: 30px;
+            font-size: 14px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    
+  <nav>
+    <div class="logo">
+      <img src="logoo.png" alt="Logo">
+      <div class="logo-text">
+        <span>Alumni</span>
+        <span>Golden Valley</span>
+      </div>
+    </div>
+
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li>
+        <a href="#" onclick="toggleDropdown(event,this.parentNode)">About</a>
+        <div class="dropdown-content">
+          <a href="about-alumni.html">About Alumni</a>
+          <a href="about-us.html">About Team</a>
+        </div>
+      </li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="schedule.html">Schedule</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li>
+        <a href="#" onclick="toggleDropdown(event,this.parentNode)">Gallery</a>
+        <div class="dropdown-content">
+          <a href="past-gallery.html">Past Events</a>
+          <a href="ongoing-gallery.html">Current Event</a>
+        </div>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.html"><button class="login-btn">Login</button></a></li>
+    </ul>
+  </nav>
+
+  
+
+ 
+  <!-- Coming Soon Section -->
+  <section class="coming-soon">
+    <h1>🚀 Coming Soon</h1>
+    <p>Our next big event is on the way. Stay tuned for updates!</p>
+    <div class="countdown">
+      <div><span id="days">00</span><small>Days</small></div>
+      <div><span id="hours">00</span><small>Hours</small></div>
+      <div><span id="minutes">00</span><small>Minutes</small></div>
+      <div><span id="seconds">00</span><small>Seconds</small></div>
+    </div>
+  </section>
+    <!-- <footer>
+    <div>
+      <h3 style="color:yellow;">Alumni Association</h3>
+      <p>Building connections through events & community.</p>
+    </div>
+    <div>
+      <h3 style="color:yellow;">Contact</h3>
+      <p>Email: contact@association.com</p>
+      <p>Phone: +91 9999999999</p>
+    </div>
+    <div>
+      <a href="https://www.google.com/maps/place/Golden+Valley+HS+School/">
+        <h3 style="color:yellow;"><i class="fa-solid fa-location-dot"></i> Location</h3>
+      </a>
+      <p>Padmapur | Dharmanagar | Tripura</p>
+    </div>
+    <div>
+      <h3 style="color:yellow;">Follow Us</h3>
+      <div class="socials">
+        <a href="https://www.facebook.com/gvhs.alumni/"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div> -->
+  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2025/08/30/19/20250830190753-XP3BMBNB.js"></script>
+  <script>
+  
+    </script>
+    <script>
+
+      // Countdown Example (set your event date here)
+      const eventDate = new Date("2025-09-20T00:00:00").getTime();
+      
+      const timer = setInterval(function(){
+        const now = new Date().getTime();
+        const distance = eventDate - now;
+        
+        if(distance < 0){
+          clearInterval(timer);
+          document.querySelector(".coming-soon p").innerHTML = "The event has started!";
+          return;
+        }
+        
+        const days = Math.floor(distance / (1000*60*60*24));
+        const hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+        const minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+        const seconds = Math.floor((distance % (1000*60))/1000);
+        
+        document.getElementById("days").innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
+      }, 1000);
+        const hamburger=document.getElementById('hamburger');
+    const navLinks=document.getElementById('navLinks');
+
+    hamburger.addEventListener('click',(e)=>{
+      e.stopPropagation();
+      navLinks.classList.toggle('active');
+    });
+
+    document.addEventListener('click',(e)=>{
+      if(!navLinks.contains(e.target) && !hamburger.contains(e.target)){
+        navLinks.classList.remove('active');
+      }
+    });
+
+    function toggleDropdown(event,parent){
+      if(window.innerWidth<=768){
+        event.preventDefault();
+        parent.classList.toggle('active');
+      }
+    }
+
+      </script>
+  
+</body>
+</html>
+
+</body>
+</html>
+

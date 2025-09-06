@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="login_style.css" />
+</head>
+<body>
+  <!-- Background video -->
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="https://res.cloudinary.com/ddc83vzoz/video/upload/v1756940158/cateye_pbuihe.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="login-container">
+    <form class="login-box" id="loginForm">
+      <h2>Login</h2>
+
+      <!-- Email & Password -->
+      <input type="email" id="email" placeholder="Email" required/>
+      <input type="password" id="password" placeholder="Password" required/>
+      
+      <div class="options">
+        <!-- Remember Me -->
+        <label>
+          <input type="checkbox" id="rememberMe"> Remember Me
+        </label>
+
+        <!-- Forgot Password -->
+        <a href="#" id="forgotPassword">Forgot Password?</a>
+      </div>
+
+      <!-- Login Button -->
+      <button id="loginBtn" type="submit"">Login</button>
+      
+      <!-- Register Link -->
+      <p class="register-link">Don't have an account? <a href="register.html">Register</a></p> 
+
+      <!-- Divider -->
+      <div class="divider">OR</div>
+
+      <!-- Google Login Button -->
+      <button id="googleLoginBtn" class="google-btn">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" 
+         alt="Google logo" 
+          class="google-logo">
+          Continue with Google
+      </button>
+
+       
+    </form>
+  </div>
+
+
+   <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { 
+      getAuth, 
+      signInWithEmailAndPassword, 
+      sendPasswordResetEmail, 
+      setPersistence, 
+      browserLocalPersistence, 
+      browserSessionPersistence,
+      GoogleAuthProvider, 
+      signInWithPopup 
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBr-rv7Q9lwuYDQGX0fWIpZSTYTJiZQmEk",
+      authDomain: "login-page-17728.firebaseapp.com",
+      projectId: "login-page-17728",
+      storageBucket: "login-page-17728.firebasestorage.app",
+      messagingSenderId: "36597918855",
+      appId: "1:36597918855:web:169af2e4d94ea146695c22",
+      measurementId: "G-PQQ3KY9MQW"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+ 
+    
+    const provider = new GoogleAuthProvider();
+
+    // ✅ 1. Google Login Handler
+    // This is attached ONLY to the Google Button.
+    document.getElementById("googleLoginBtn").addEventListener("click", (e) => {
+      e.preventDefault(); // Stop any form submission behavior
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          const user = result.user;
+          alert("Welcome " + user.displayName + " (" + user.email + ")");
+          window.location.href = "index.html"; // redirect to home
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("❌ Google Login Error: " + error.message);
+        });
+    });
+
+    // ✅ Email/Password Login
+    document.getElementById("loginForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const rememberMe = document.getElementById("rememberMe").checked;
+
+      if (!email || !password) {
+        alert("⚠️ Please fill in all fields!");
+        return;
+      }
+
+      const persistenceType = rememberMe 
+        ? browserLocalPersistence 
+        : browserSessionPersistence;
+
+      setPersistence(auth, persistenceType)
+        .then(() => signInWithEmailAndPassword(auth, email, password))
+        .then(() => {
+          alert("✅ Login successful!");
+          window.location.href = "index.html"; // ✅ home page
+        })
+        .catch((error) => {
+          if (error.code === "auth/user-not-found") {
+            alert("⚠️ No account found! Please register first.");
+            window.location.href = "register.html";
+          } else {
+            alert("❌ " + error.message);
+          }
+        });
+    });
+
+    // ✅ Forgot Password
+    document.getElementById("forgotPassword").addEventListener("click", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+
+      if (!email) {
+        alert("⚠️ Please enter your email first.");
+        return;
+      }
+
+      sendPasswordResetEmail(auth, email)
+        .then(() => {
+          alert("📩 Password reset email sent! Check your inbox.");
+        })
+        .catch((error) => {
+          alert("❌ " + error.message);
+        });
+    });
+  </script>
+</body>
+</html>
