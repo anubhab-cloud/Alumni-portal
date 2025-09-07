@@ -50,123 +50,204 @@ a {
 }
 
 /* NAVBAR */
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #16245f70;
-  padding: 17px 22px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
+ nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #16245f70;
+      padding: 17px 22px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-.logo {
-  display: flex;
-  align-items: center;
-}
+    .logo {
+      display: flex;
+      align-items: center;
+    }
 
-.logo img {
-  height: 38px;
-  margin-right: 6px;
-}
+    .logo img {
+      height: 38px;
+      margin-right: 0px;
+    }
 
-.logo-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-}
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
 
-.logo-text span:first-child {
-  font-size: 1.2rem;
-  font-weight: 900;
-}
+    .logo-text span:first-child {
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
 
-.logo-text span:last-child {
-  font-size: 0.85rem;
-  color: #aaa;
-}
+    .logo-text span:last-child {
+      font-size: 0.85rem;
+      color: #aaa;
+    }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: right 0.3s ease;
+    }
 
-.nav-links li:last-child {
-  margin-left: auto;
-}
+    .nav-links li {
+      position: relative;
+    }
 
-.nav-links a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  padding: 8px 12px;
-  transition: 0.3s;
-}
+    .nav-links li:last-child {
+      margin-left: 280px;
+    }
 
-.nav-links a:hover {
-  color: rgba(0, 175, 239, 0.961);
-}
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      padding: 8px 12px;
+      transition: 0.3s;
+    }
 
-/* Dropdown */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 110%;
-  left: 0;
-  background: #1a1a1a;
-  border-radius: 6px;
-  min-width: 160px;
-  z-index: 1001;
-}
+    .nav-links a:hover {
+      color: rgba(0, 175, 239, 0.961);
+    }
 
-.dropdown-content a {
-  display: block;
-  padding: 10px;
-  color: white;
-  font-weight: 500;
-}
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background: #1a1a1a;
+      border-radius: 6px;
+      min-width: 160px;
+      z-index: 1001;
+    }
 
-.dropdown-content a:hover {
-  background: #333;
-}
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      color: white;
+      font-weight: 500;
+    }
 
-.nav-links li:hover .dropdown-content {
-  display: block;
-}
+    .dropdown-content a:hover {
+      background: #333;
+    }
 
-/* Buttons */
-.login-btn {
-  background: rgb(0, 170, 255);
-  color: white;
-  font-weight: 700;
-  padding: 10px 25px;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: 0.3s;
-}
+    .nav-links li:hover .dropdown-content {
+      display: block;
+    }
 
-.login-btn:hover {
-  background: #c70000;
-}
+    .login-btn {
+      background: rgb(0, 170, 255);
+      color: white;
+      font-weight: 700;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-/* Hamburger */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  gap: 5px;
-}
+    .login-btn:hover {
+      background: #c70000;
+    }
 
-.hamburger span {
-  width: 25px;
-  height: 3px;
-  background: white;
-  border-radius: 3px;
-}
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 1200px) {
+      .nav-links li:last-child {
+        margin-left: 150px;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .nav-links li:last-child {
+        margin-left: 50px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 65px;
+        right: -100%;
+        flex-direction: column;
+        background: #000;
+        width: 220px;
+        height: calc(100vh - 65px);
+        padding: 20px;
+        overflow-y: auto;
+        gap: 0;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links li {
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      .nav-links li:last-child {
+        margin-left: 0;
+        margin-top: 20px;
+      }
+
+      .dropdown-content {
+        position: static;
+        display: none;
+        margin-top: 10px;
+        margin-left: 20px;
+        width: calc(100% - 20px);
+      }
+
+      .nav-links li.active .dropdown-content {
+        display: block;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+      footer{
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 576px) {
+      nav {
+        padding: 10px 15px;
+      }
+      .logo img {
+        height: 35px;
+      }
+      .logo-text span:first-child {
+        font-size: 1rem;
+      }
+      .logo-text span:last-child {
+        font-size: 0.75rem;
+      }
+      footer{
+        text-align: center;
+      }
+    }
 
 /* HERO */
 .hero {
@@ -463,14 +544,14 @@ footer {
   .sub {
     font-size: 1rem;
   }
-  .nav-links li:last-child {
+  /* .nav-links li:last-child {
     margin-left: 0;
-  }
+  } */
 }
 
 /* Mobile menu */
 @media (max-width: 768px) {
-  .nav-links {
+  /* .nav-links {
     position: fixed;
     top: 65px;
     right: -100%;
@@ -493,7 +574,7 @@ footer {
   }
   .hamburger {
     display: flex;
-  }
+  } */
   .hero-visual {
     width: 100%;
     max-width: 400px;
@@ -541,41 +622,41 @@ footer {
   <!-- NAVBAR (from your previous response) -->
 <!-- Navbar -->
     <nav>
-        <div class="logo">
-            <img src="logoo.png" alt="Logo">
-            <div class="logo-text">
-                <span>Alumni</span>
-                <span>Golden Valley</span>
-            </div>
-        </div>
+    <div class="logo">
+      <img src="logoo.png"  alt="Logo">
+      <div class="logo-text">
+        <span>Alumni</span>
+        <span>Golden Valley</span>
+      </div>
+    </div>
 
-        <div class="hamburger" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
-        </div>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
 
-        <ul class="nav-links" id="navLinks">
-            <li><a href="index.html">Home</a></li>
-            <li>
-                <a href="#" onclick="toggleDropdown(event, this.parentNode)">About</a>
-                <div class="dropdown-content">
-                    <a href="about-alumni.html">About Alumni</a>
-                    <a href="about-us.html">About Team</a>
-                </div>
-            </li>
-            <li><a href="events.html">Events</a></li>
-            <li><a href="schedule.html">Schedule</a></li>
-            <li><a href="sponsors.html">Sponsors</a></li>
-            <li>
-                <a href="#" onclick="toggleDropdown(event, this.parentNode)">Gallery</a>
-                <div class="dropdown-content">
-                    <a href="past-gallery.html">Past Events</a>
-                    <a href="ongoing-gallery.html">Current Event</a>
-                </div>
-            </li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="login.html"><button class="login-btn">Login</button></a></li>
-        </ul>
-    </nav>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li>
+        <a href="#" onclick="toggleDropdown(event, this.parentNode)">About</a>
+        <div class="dropdown-content">
+          <a href="about-alumni.html">About Alumni</a>
+          <a href="about-us.html">About Team</a>
+        </div>
+      </li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="schedule.html">Schedule</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li>
+        <a href="#" onclick="toggleDropdown(event, this.parentNode)">Gallery</a>
+        <div class="dropdown-content">
+          <a href="past-gallery.html">Past Events</a>
+          <a href="ongoing-gallery.html">Current Event</a>
+        </div>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.html"><button class="login-btn">Login</button></a></li>
+    </ul>
+  </nav>
   <!-- HERO -->
    <div class="upper" style="padding: 50px;"></div>
 
@@ -745,31 +826,28 @@ Founded on 30th June 1989, Golden Valley H.S. School stands as a premier institu
      <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
     <script src="https://files.bpcontent.cloud/2025/08/30/19/20250830190753-XP3BMBNB.js"></script>
   <script>
-    // Hamburger menu
-    function toggleMenu(){ 
-      document.getElementById('navLinks').classList.toggle('active'); 
-    }
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
 
-    // Mobile dropdown toggle
-    function toggleDropdown(event, parent) {
-      if (window.innerWidth <= 768) {
-        event.preventDefault();
-        parent.classList.toggle('active');
-      }
-    }
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navLinks.classList.toggle('active');
+    });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-      const navLinks = document.getElementById('navLinks');
-      const hamburger = document.querySelector('.hamburger');
-      
-      if (window.innerWidth <= 768 && 
-          !navLinks.contains(event.target) && 
-          !hamburger.contains(event.target) &&
-          navLinks.classList.contains('active')) {
+    // Close nav when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
         navLinks.classList.remove('active');
       }
     });
+
+    // Dropdown toggle in mobile
+    function toggleDropdown(e, element) {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        element.classList.toggle("active");
+      }
+    }
 
     // Reveal on scroll
     const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
